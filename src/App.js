@@ -5,9 +5,9 @@ function App() {
   const [query, setQuery] = useState(false);
   const d = Object.entries(data);
   const resultsel = document.getElementById("results");
-  let emojis = {};
-
+  
   useEffect(() => {
+    let emojis = {};
     if(query.length > 0){
       emojis = d.filter(emoji => emoji[1].keywords.includes(query));
       resultsel.innerHTML = "";
