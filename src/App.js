@@ -6,7 +6,8 @@ function App() {
   const d = Object.entries(data);
   const resultsel = document.getElementById("results");
   let emojis = {};
-  function search(){
+
+  useEffect(() => {
     if(query.length > 0){
       emojis = d.filter(emoji => emoji[1].keywords.includes(query));
       resultsel.innerHTML = "";
@@ -20,20 +21,14 @@ function App() {
         span.innerHTML = "&#x" + emoji[1].code_points.base.split("-")[0] + ";";
         resultsel.appendChild(span);
         if(resultsel.innerHTML!==""){
-          document.querySelectorAll("span").forEach((e)=>e.addEventListener("click", (t)=>copy(t.target.innerHTML)));
+          document.querySelectorAll("span").forEach((e)=>e.addEventListener("click", (t)=>navigator.clipboard.writeText(t.target.innerHTML)));
         }
       });
     }else if(query!==false && query.length === 0){
       resultsel.innerHTML = "";
     }
-  }
-  useEffect(() => {
-    search();
+    
   }, [query]);
-
-  function copy(t) {  
-    navigator.clipboard.writeText(t);
-  }
 
   return (
     <div className="App">
