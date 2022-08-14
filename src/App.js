@@ -13,11 +13,11 @@ function App() {
       emojis.forEach(emoji => {
         let span = document.createElement("span");
         if(emoji[1].diversity==null){
-          span.className = "joypixels-40-" + emoji[1].category + " _" + emoji[1].code_points.base + " _" + emoji[1].code_points.fully_qualified;
+          span.className = `joypixels-40-${emoji[1].category} _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}`;
         }else{
-          span.className = "joypixels-40-diversity" + " _" + emoji[1].code_points.base + " _" + emoji[1].code_points.fully_qualified;
+          span.className = `joypixels-40-diversity _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}`;
         }
-        span.innerHTML = "&#x" + emoji[1].code_points.base.split("-")[0] + ";";
+        span.innerHTML = `&#x${emoji[1].code_points.base.split("-")[0]};`;
         resultsel.appendChild(span);
         if(resultsel.innerHTML!==""){
           document.querySelectorAll("span").forEach((e)=>e.addEventListener("click", (t)=>navigator.clipboard.writeText(t.target.innerHTML)));
