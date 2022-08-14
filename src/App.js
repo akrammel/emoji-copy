@@ -3,13 +3,12 @@ import data from './emoji.json';
 
 function App() {
   const [query, setQuery] = useState(false);
-  const d = Object.entries(data);
-  const resultsel = document.getElementById("results");
-  
+
   useEffect(() => {
+    const resultsel = document.getElementById("results");
     let emojis = {};
     if(query.length > 0){
-      emojis = d.filter(emoji => emoji[1].keywords.includes(query));
+      emojis = Object.entries(data).filter(emoji => emoji[1].keywords.includes(query));
       resultsel.innerHTML = "";
       emojis.forEach(emoji => {
         let span = document.createElement("span");
@@ -27,7 +26,6 @@ function App() {
     }else if(query!==false && query.length === 0){
       resultsel.innerHTML = "";
     }
-    
   }, [query]);
 
   return (
