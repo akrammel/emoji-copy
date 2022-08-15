@@ -80,7 +80,7 @@ function App() {
       <div>
         <nav>
           <div className='logo'>
-            <img src={logo}></img>
+            <img alt='' src={logo}></img>
           </div>
         </nav>
         <nav className='secondNav'>
