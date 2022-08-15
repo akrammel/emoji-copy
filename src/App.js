@@ -1,40 +1,100 @@
 import React, { useState, useEffect } from 'react';
 import data from './emoji.json';
+import logo from './logo.png';
 
 function App() {
-  const [query, setQuery] = useState(false);
+  const [resultsElement, setresultsElement] = useState([]);
+  const [query, setQuery] = useState("");
+  let categoriesElement = [];
+  const categories = {
+    0: {
+      name: "people",
+      title: "Smileys & People"
+    },
+    1: {
+      name: "nature",
+      title: "Animals & Nature"
+    },
+    2: {
+      name: "food",
+      title: "Food & Drink"
+    },
+    3: {
+      name: "activity",
+      title: "Activity"
+    },
+    4: {
+      name: "travel",
+      title: "Travel & Places"
+    },
+    5: {
+      name: "objects",
+      title: "Objects"
+    },
+    6: {
+      name: "symbols",
+      title: "Symbols"
+    },
+    7: {
+      name: "flags",
+      title: "Flags"
+    }
+  }
+  
+  Object.entries(categories).forEach((cat)=>{
+      const catEmojis = Object.entries(data).filter(emoji => emoji[1].category===cat[1].name);
+      let catElement = [<h1 key={cat[1].title}>{cat[1].title}</h1>]
 
-  useEffect(() => {
-    const resultsel = document.getElementById("results");
-    let emojis = {};
-    if(query.length > 0){
-      emojis = Object.entries(data).filter(emoji => emoji[1].keywords.includes(query));
-      resultsel.innerHTML = "";
-      emojis.forEach(emoji => {
-        let span = document.createElement("span");
-        if(emoji[1].diversity==null){
-          span.className = `joypixels-40-${emoji[1].category} _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}`;
+      catEmojis.forEach(emoji => {
+        if(emoji[1].diversity===null){
+          catElement.push(<span key={`${emoji[1].code_points.base}-${emoji[1].order}`} className={`joypixels-40-${emoji[1].category} _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}`} onClick={(e)=>{copy(emoji[1].code_points.base.split("-")[0])}}></span>)
         }else{
-          span.className = `joypixels-40-diversity _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}`;
-        }
-        span.innerHTML = `&#x${emoji[1].code_points.base.split("-")[0]};`;
-        resultsel.appendChild(span);
-        if(resultsel.innerHTML!==""){
-          document.querySelectorAll("span").forEach((e)=>e.addEventListener("click", (t)=>navigator.clipboard.writeText(t.target.innerHTML)));
+          catElement.push(<span key={`${emoji[1].code_points.base}-${emoji[1].order}`} className={`joypixels-40-diversity _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}}`} onClick={(e)=>{copy(emoji[1].code_points.base.split("-")[0])}}></span>)
         }
       });
-    }else if(query!==false && query.length === 0){
-      resultsel.innerHTML = "";
+      categoriesElement.push(catElement)
+  });
+
+  function copy(t){
+    navigator.clipboard.writeText(String.fromCodePoint(parseInt (t, 16)))
+  }
+  
+  useEffect(() => {
+    if(query.length > 0){
+      let r = [];
+      const emojis = Object.entries(data).filter(emoji => emoji[1].keywords.includes(query.toLowerCase()));
+      emojis.forEach(emoji => {
+        if(emoji[1].diversity===null){
+          r.push(<span key={`${emoji[1].code_points.base}-${emoji[1].order}`} className={`joypixels-40-${emoji[1].category} _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}`} onClick={(e)=>{copy(emoji[1].code_points.base.split("-")[0])}}></span>)
+        }else{
+          r.push(<span key={`${emoji[1].code_points.base}-${emoji[1].order}`} className={`joypixels-40-diversity _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}}`} onClick={(e)=>{copy(emoji[1].code_points.base.split("-")[0])}}></span>)
+        }
+      });
+      setresultsElement(r);
+    }else{
+      setresultsElement([]);
     }
   }, [query]);
 
   return (
-    <div className="App">
-      <div className="screenCenter">
-        <input autoComplete="off" type="text" placeholder="Search emoji" onChange={(e)=>{setQuery(e.target.value)}}></input>
-        <div id="results"></div>
+      <div>
+        <nav>
+          <div className='logo'>
+            <img src={logo}></img>
+          </div>
+        </nav>
+        <nav className='secondNav'>
+          <div>
+            <input autoComplete="off" placeholder="SEARCH" onChange={(e)=>{setQuery(e.target.value)}}/>
+            <span className="joypixels-40-objects _1f50e"></span>
+          </div>
+        </nav>
+
+        <div className="wrapper">
+          {resultsElement.length>0?<div id="results">{resultsElement}</div>:<div>{query.length>0&&resultsElement.length===0?<h1>NO MATCHES</h1>:null}<div id="categories">{categoriesElement}</div></div>}
+        </div>
+
       </div>
-    </div>
   );
 }
 
