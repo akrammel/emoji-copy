@@ -17,3 +17,4 @@ Basic React app (Search - Click - Paste)
 
 # Thank _You_!
 Please :star: this repo to help improve the quality.
+
