@@ -39,6 +39,7 @@ nav {
   width: 100%;
   height: 100%;
   margin-left: 300px;
+  margin-right: 300px;
   position: relative;
   display: flex;
   align-items: center;
@@ -82,36 +83,98 @@ h1{
   color: rgb(166, 166, 166);
   font-weight: 500;
 }
-
 #results>span:hover,#categories>span:hover{
   background-color: rgba(0, 0, 0, .075);
   cursor: pointer;
   border-radius: 5px;
 }
-
 @media only screen and (max-width: 1200px) {
   .wrapper {
     padding: 155px 100px;
   }
   .logo, .secondNav>div {
     margin-left: 100px;
+    margin-right: 100px;
   }
 }
-
 @media only screen and (max-width: 720px) {
   .wrapper {
     padding: 155px 50px;
   }
   .logo, .secondNav>div {
     margin-left: 50px;
+    margin-right: 50px;
   }
 }
-
 @media only screen and (max-width: 450px) {
   .wrapper {
     padding: 155px 15px;
   }
   .logo, .secondNav>div {
     margin-left: 15px;
+    margin-right: 15px;
   }
+}
+
+.secondNav>div>button{
+  width: 45px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #F0F0F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+.secondNav>div>button>span{
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+}
+
+.skintone-1f3fa{
+  background: #ffcf11;
+}
+.skintone-1f3fb{
+  background: #fae3c3;
+}
+.skintone-1f3fc{
+  background: #e2cfa1;
+}
+.skintone-1f3fd{
+  background: #dba373;
+}
+.skintone-1f3fe{
+  background: #a88054;
+}
+.skintone-1f3ff{
+  background: #5f4e43;
+}
+
+.secondNav>div>ul{
+  list-style: none;
+  background: #fff;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 285px;
+  margin-left: -42.5px;
+  border: 1px #F0F0F0 solid;
+  border-radius: 5px;
+}
+
+.secondNav>div>ul>li{
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.secondNav>div>ul>li:hover,.secondNav>div>button{
+  cursor: pointer;
 }
