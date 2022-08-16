@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 ![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)
 
-Basic React app (Search - Click - Paste)
+This is a basic React app to search for emojis and copy them easily.
 
 ## Features :dart:
 * [x] Free & Open Source.
