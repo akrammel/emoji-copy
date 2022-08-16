@@ -53,7 +53,7 @@ function App() {
           catElement.push(<span key={`${emoji[1].code_points.base}-${emoji[1].order}`} className={`joypixels-40-${emoji[1].category} _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}`} onClick={(e)=>{copy(emoji[1].code_points.base.split("-")[0])}}></span>)
         }else if(emoji[1].diversity !== null && skinTone!=='1f3fa' && emoji[1].diversity.includes(skinTone)){
           catElement.push(<span key={`${emoji[1].code_points.base}-${emoji[1].order}`} className={`joypixels-40-diversity _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}}`} onClick={(e)=>{copy(emoji[1].code_points.base.split("-")[0])}}></span>)
-        }else if(skinTone=='1f3fa' && emoji[1].diversity===null){
+        }else if(skinTone==='1f3fa' && emoji[1].diversity===null){
           catElement.push(<span key={`${emoji[1].code_points.base}-${emoji[1].order}`} className={`joypixels-40-${emoji[1].category} _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}`} onClick={(e)=>{copy(emoji[1].code_points.base.split("-")[0])}}></span>)
         }
       });
@@ -72,7 +72,7 @@ function App() {
           r.push(<span key={`${emoji[1].code_points.base}-${emoji[1].order}`} className={`joypixels-40-${emoji[1].category} _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}`} onClick={(e)=>{copy(emoji[1].code_points.base.split("-")[0])}}></span>)
         }else if(emoji[1].diversity !== null && skinTone!=='1f3fa' && emoji[1].diversity.includes(skinTone)){
           r.push(<span key={`${emoji[1].code_points.base}-${emoji[1].order}`} className={`joypixels-40-diversity _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}}`} onClick={(e)=>{copy(emoji[1].code_points.base.split("-")[0])}}></span>)
-        }else if(skinTone=='1f3fa' && emoji[1].diversity===null){
+        }else if(skinTone==='1f3fa' && emoji[1].diversity===null){
           r.push(<span key={`${emoji[1].code_points.base}-${emoji[1].order}`} className={`joypixels-40-${emoji[1].category} _${emoji[1].code_points.base} _${emoji[1].code_points.fully_qualified}`} onClick={(e)=>{copy(emoji[1].code_points.base.split("-")[0])}}></span>)
         }
       });
