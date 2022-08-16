@@ -13,8 +13,8 @@ Basic React app (Search - Click - Paste)
 * React
 
 ## Screenshot
-![screenshots](screenshot.png)
-
+![screenshots](screenshots/home.png)
+![screenshots](screenshots/search.png)
 # Thank _You_!
 Please :star: this repo to help improve the quality.
 
