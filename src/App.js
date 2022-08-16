@@ -80,7 +80,7 @@ function App() {
     }else{
       setresultsElement([]);
     }
-  }, [query]);
+  }, [query, skinTone]);
 
   return (
       <div>
@@ -93,7 +93,7 @@ function App() {
           <div>
             <input autoComplete="off" placeholder="SEARCH" onChange={(e)=>{setQuery(e.target.value)}}/>
             <span className="joypixels-40-objects _1f50e"></span>
-            <button role="button" onClick={()=>setshowSkintones(!showSkintones)}><span className={`skintone-${skinTone}`}></span></button>
+            <button onClick={()=>setshowSkintones(!showSkintones)}><span className={`skintone-${skinTone}`}></span></button>
             {showSkintones?<ul>{skinTones}</ul>:null}
           </div>
         </nav>
