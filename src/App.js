@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import data from './emoji.json';
 import logo from './logo.png';
 
@@ -8,6 +8,8 @@ function App() {
   const [skinTone, setSkinTone] = useState("1f3fa");
   const [showSkintones, setshowSkintones] = useState(false);
   const skinTones = [];
+  const skinTonesList = useRef();
+  const skintonesButton = useRef();
   ["1f3fa", "1f3fb", "1f3fc", "1f3fd", "1f3fe", "1f3ff"].forEach((s)=>{skinTones.push(<li key={s} className={`skintone-${s}`} onClick={()=>setSkinTone(s)}></li>)});
   let categoriesElement = [];
   const categories = {
@@ -82,8 +84,17 @@ function App() {
     }
   }, [query, skinTone]);
 
+  // close skintones menu
+  useEffect(() => {
+    document.addEventListener("mousedown", (event)=>{
+      if(skintonesButton.current && !skintonesButton.current.contains(event.target) && skinTonesList.current && !skinTonesList.current.contains(event.target)){
+        setshowSkintones(false);
+      }
+    });
+  }, []);
+  
   return (
-      <div>
+      <>
         <nav>
           <div className='logo'>
             <img alt='' src={logo}></img>
@@ -93,8 +104,8 @@ function App() {
           <div>
             <input autoComplete="off" placeholder="SEARCH" onChange={(e)=>{setQuery(e.target.value)}}/>
             <span className="joypixels-40-objects _1f50e"></span>
-            <button onClick={()=>setshowSkintones(!showSkintones)}><span className={`skintone-${skinTone}`}></span></button>
-            {showSkintones?<ul>{skinTones}</ul>:null}
+            <button ref={skintonesButton} onClick={()=>setshowSkintones(!showSkintones)}><span className={`skintone-${skinTone}`}></span></button>
+            {showSkintones?<ul ref={skinTonesList}>{skinTones}</ul>:null}
           </div>
         </nav>
 
@@ -102,7 +113,7 @@ function App() {
           {resultsElement.length>0?<div id="results">{resultsElement}</div>:<div>{query.length>0&&resultsElement.length===0?<h1>No Matches</h1>:null}<div id="categories">{categoriesElement}</div></div>}
         </div>
 
-      </div>
+      </>
   );
 }
 
